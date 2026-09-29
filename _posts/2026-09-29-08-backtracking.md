@@ -39,12 +39,14 @@ void backtracking(参数) {
     }
 }
 ```
-### 组合
+## 回溯问题
+### 一、组合
 
 1. leetcode 77. 组合
+
 ```cpp
-   class Solution {
-   public:
+class Solution {
+public:
     vector<vector<int>> combine(int n, int k) {
         backtracking(n, k, 1);
         return res;
@@ -63,16 +65,17 @@ void backtracking(参数) {
         }
     }
 
-   private:
+private:
     vector<vector<int>> res;
     vector<int> path;
-   }
+}
 ```
 
 2. leetcode 40. 组合总和2
-   ```cpp
-   class Solution{
-   public:
+
+```cpp
+class Solution{
+public:
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
         sort(candidates.begin(), candidates.end());
         backtracking(candidates, 0, target, 0);
@@ -103,15 +106,17 @@ void backtracking(参数) {
             path.pop_back();
         }
     }
-   private:
+private:
     vector<int> path;
     vector<vector<int>> res;
-   };
-   ```
+};
+```
+
 3. leetcode 216. 组合总和3
-   ```cpp
-   class Solution {
-   public:
+
+```cpp
+class Solution {
+public:
     vector<vector<int>> combinationSum3(int k, int n) {
         backtracking(n, k, 0, 1);
         return res;
@@ -138,15 +143,17 @@ void backtracking(参数) {
             path.pop_back();
         }
     }
-   private:
+private:
     vector<vector<int>> res;
     vector<int> path;
-   };
-   ```
+};
+```
+
 4. leetcode 17. 电话号码的组合
-   ```cpp
-   class Solution {
-   public:
+
+```cpp
+class Solution {
+public:
     vector<string> letterCombinations(string digits) {
         if (digits.length() == 0) return res;
         backtracking(digits, 0);
@@ -167,7 +174,7 @@ void backtracking(参数) {
         }
     }
 
-   private:
+private:
     string path;
     vector<string> res;
     const string letterMap[10] = {
@@ -182,5 +189,5 @@ void backtracking(参数) {
         "tuv", // 8
         "wxyz", // 9
     };
-   };
-   ```
+};
+```

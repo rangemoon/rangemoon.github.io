@@ -9,7 +9,7 @@ layout: default
       {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
       {%- assign display_date = page.last_modified_at | default: page.date -%}
       <time class="dt-published" datetime="{{ display_date | date_to_xmlschema }}" itemprop="dateModified">
-        {{ display_date | date: date_format }}
+        最后更新于 {{ display_date | date: date_format }}
       </time>
       {%- if page.author -%}
         • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>

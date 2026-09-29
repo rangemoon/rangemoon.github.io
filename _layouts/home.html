@@ -16,7 +16,7 @@ layout: default
       <li>
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
         {%- assign display_date = post.last_modified_at | default: post.date -%}
-        <span class="post-meta">{{ display_date | date: date_format }}</span>
+        <span class="post-meta">最后更新于 {{ display_date | date: date_format }}</span>
         <h3>
           <a class="post-link" href="{{ post.url | relative_url }}">
             {{ post.title | escape }}
