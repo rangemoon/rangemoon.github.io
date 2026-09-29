@@ -24,11 +24,10 @@ description: >- # this means to ignore newlines until "baseurl:"
   数组、二叉树、回溯、贪心与图论笔记。
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://rangemoon.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: ""
 github_username: rangemoon
 lang: zh-CN
 minima:
-  date_format: "%Y-%m-%d"
+  date_format: "%Y-%m-%d %H:%M"
 
 # Build settings
 theme: minima
