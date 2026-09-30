@@ -1,18 +1,46 @@
 ---
 ---
 
-// 中文正文不用 Minima 默认的细字重和负字距，否则标题和引用会发虚。
-$base-font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
-$base-font-size: 18px;
-$base-line-height: 1.8;
-$content-width: 760px;
-$brand-color: #0f6b4c;
-$background-color: #f7f5f0;
-$text-color: #1c1c1c;
-$grey-color: #5e6872;
-$spacing-unit: 28px;
+// Lanyon / Poole 风格：衬线正文 + 无衬线标题，偏冷灰白底。
+// 中文回退放在英文字体后，避免 PT 系列缺字时整页发虚。
+$base-font-family: "PT Serif", "Noto Serif SC", "Source Han Serif SC", "Songti SC", Georgia, "Times New Roman", serif;
+$heading-font-family: "PT Sans", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, sans-serif;
+$code-font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+$base-font-size: 16px;
+$base-line-height: 1.5;
+$content-width: 720px;
+$brand-color: #268bd2;
+$background-color: #fff;
+$text-color: #515151;
+$grey-color: #9a9a9a;
+$heading-color: #313131;
+$strong-color: #303030;
+$spacing-unit: 30px;
 
 @import "minima";
+
+@media (min-width: 38em) {
+  html {
+    font-size: 20px;
+  }
+}
+
+body {
+  color: $text-color;
+  background-color: $background-color;
+}
+
+a {
+  color: $brand-color;
+
+  &:visited {
+    color: darken($brand-color, 10%);
+  }
+
+  &:hover {
+    color: darken($brand-color, 15%);
+  }
+}
 
 h1,
 h2,
@@ -21,235 +49,194 @@ h4,
 h5,
 h6,
 .post-title,
-.site-title,
-blockquote {
-  letter-spacing: 0;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 650;
-  line-height: 1.4;
+.site-title {
+  font-family: $heading-font-family;
+  font-weight: 400;
+  color: $heading-color;
+  letter-spacing: -0.025rem;
+  line-height: 1.25;
+  text-rendering: optimizeLegibility;
 }
 
 h1,
 .post-title {
-  font-size: 2.05rem;
+  font-size: 2rem;
 }
 
 h2 {
-  font-size: 1.48rem;
+  margin-top: 1rem;
+  font-size: 1.5rem;
 }
 
 h3 {
-  font-size: 1.18rem;
+  margin-top: 1.5rem;
+  font-size: 1.25rem;
 }
 
-h4 {
-  font-size: 1.05rem;
-}
-
+h4,
 h5,
 h6 {
+  margin-top: 1rem;
   font-size: 1rem;
 }
 
+strong {
+  color: $strong-color;
+}
+
 .site-header {
-  border-top-color: $brand-color;
+  border-top: 0;
+  border-bottom: 1px solid #eee;
   background-color: #fff;
 }
 
 .site-title,
 .site-title:visited {
-  color: #16382c;
-  font-weight: 650;
+  color: #505050;
+  font-weight: 400;
+  letter-spacing: -0.025rem;
 }
 
 .post-title {
-  line-height: 1.3;
+  margin-top: 0;
   margin-bottom: 0.35em;
-  font-size: 2.05rem;
+  color: $strong-color;
+}
+
+.post-meta {
+  color: $grey-color;
 }
 
 .post-content {
-  $list-marker-width: 1.65em;
-
   h2 {
-    margin-top: 1.5em;
-    padding-bottom: 0.2em;
-    border-bottom: 1px solid #e6e1d6;
-    font-size: 1.48rem;
+    margin-top: 1.5rem;
+    padding-bottom: 0;
+    border-bottom: 0;
+    font-size: 1.5rem;
   }
 
   h3 {
-    margin-top: 1.25em;
-    font-size: 1.18rem;
+    margin-top: 1.5rem;
+    font-size: 1.25rem;
   }
 
   h4 {
-    font-size: 1.05rem;
+    font-size: 1rem;
   }
 
   p,
   li {
-    line-height: 1.85;
+    line-height: 1.5;
   }
 
-  // 一级有序/无序列表共用同一标记槽，让数字和圆点右缘对齐。
-  > ol,
-  > ul {
-    list-style: none;
+  // Poole/Lanyon 用浏览器默认列表标记，只保留缩进与间距。
+  ul,
+  ol {
+    margin-top: 0;
+    margin-bottom: 1rem;
     margin-left: 0;
-    padding-left: $list-marker-width;
+    padding-left: 1.5rem;
   }
 
-  > ol {
-    counter-reset: post-ol;
+  ul {
+    list-style-type: disc;
   }
 
-  > ol > li {
-    counter-increment: post-ol;
+  ol {
+    list-style-type: decimal;
   }
 
-  > ol > li::before,
-  > ul > li::before {
-    position: absolute;
-    left: -$list-marker-width;
-    width: $list-marker-width;
-    box-sizing: border-box;
-    padding-right: 0.4em;
-    text-align: right;
-    color: $grey-color;
-    font-family: "Segoe UI Symbol", "Segoe UI", Arial, sans-serif;
+  ul ul {
+    list-style-type: circle;
+    margin-bottom: 0;
   }
 
-  > ol > li,
-  > ul > li {
-    position: relative;
-  }
-
-  > ol > li::before {
-    content: counter(post-ol) ".";
-  }
-
-  > ul > li::before {
-    content: "•";
-  }
-
-  ul ul,
-  ol ul,
   ol ol,
   ul ol {
-    list-style: none;
-    margin-left: 0;
-    padding-left: $list-marker-width;
-    margin-top: 0.2em;
+    list-style-type: lower-roman;
+    margin-bottom: 0;
   }
 
-  ul ul > li,
-  ol ul > li,
-  ol ol > li,
-  ul ol > li {
-    position: relative;
+  li {
+    margin-bottom: 0.2rem;
+
+    > ul,
+    > ol {
+      margin-top: 0.25rem;
+      margin-bottom: 0.25rem;
+    }
   }
 
-  ul ul > li::before,
-  ol ul > li::before,
-  ol ol > li::before,
-  ul ol > li::before {
-    position: absolute;
-    left: -$list-marker-width;
-    width: $list-marker-width;
-    box-sizing: border-box;
-    padding-right: 0.4em;
-    text-align: right;
-    color: $grey-color;
-    font-family: "Segoe UI Symbol", "Segoe UI", Arial, sans-serif;
-  }
-
-  ul ul > li::before,
-  ol ul > li::before {
-    content: "•";
-  }
-
-  ol ol {
-    counter-reset: post-ol-nested;
-  }
-
-  ol ol > li {
-    counter-increment: post-ol-nested;
-  }
-
-  ol ol > li::before,
-  ul ol > li::before {
-    content: counter(post-ol-nested) ".";
-  }
-
-  ul ol {
-    counter-reset: post-ol-nested;
+  li::marker {
+    color: $text-color;
+    font-family: $heading-font-family;
   }
 
   blockquote {
+    margin: 0.8rem 0;
+    padding: 0.5rem 1rem;
+    color: #7a7a7a;
+    background: transparent;
+    border-left: 0.25rem solid #e5e5e5;
+    border-radius: 0;
     font-style: normal;
-    color: #24312c;
-    background: #f3f7f4;
-    border-left: 4px solid $brand-color;
-    padding: 0.7em 1em;
-    border-radius: 0 8px 8px 0;
+    letter-spacing: 0;
+
+    > :last-child {
+      margin-bottom: 0;
+    }
   }
 
   pre,
   code {
-    font-family: Consolas, "Sarasa Mono SC", "Microsoft YaHei", monospace;
+    font-family: $code-font-family;
   }
 
   :not(pre) > code {
-    background: #ece6db;
-    border: 1px solid #ddd4c6;
-    border-radius: 4px;
-    padding: 0.1em 0.38em;
-    font-size: 0.9em;
-    color: #1a3d30;
+    padding: 0.25em 0.5em;
+    font-size: 85%;
+    color: #bf616a;
+    background-color: #f9f9f9;
+    border: 0;
+    border-radius: 3px;
   }
 
   .highlight {
-    background: #f3efe6;
-    border: 1px solid #e2dacb;
-    border-left: 4px solid $brand-color;
-    border-radius: 8px;
-    margin-bottom: $spacing-unit * 0.5;
+    margin-bottom: 1rem;
+    background: #f9f9f9;
+    border: 0;
+    border-radius: 4px;
     overflow: auto;
   }
 
   pre {
-    background: #f3efe6;
-    border: 1px solid #e2dacb;
-    border-left: 4px solid $brand-color;
-    border-radius: 8px;
-    padding: 16px 18px;
-    line-height: 1.65;
+    display: block;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: $text-color;
+    background-color: #f9f9f9;
+    border: 0;
+    border-radius: 4px;
     overflow-x: auto;
-    color: #24312c;
 
     code {
+      padding: 0;
+      font-size: 100%;
+      color: inherit;
       background: transparent;
       border: 0;
-      padding: 0;
-      font-size: 0.92em;
-      color: inherit;
     }
   }
 
   .highlight pre {
+    margin-bottom: 0;
     background: transparent;
     border: 0;
     border-radius: 0;
-    margin: 0;
-    padding: 16px 18px;
+    padding: 1rem;
   }
 
   h2,
@@ -258,21 +245,25 @@ h6 {
   }
 }
 
+.site-footer {
+  border-top: 1px solid #eee;
+}
+
 .post-toc-toggle {
   position: fixed;
   top: 88px;
   right: 18px;
   z-index: 40;
-  border: 1px solid #d9d2c5;
+  border: 1px solid #eee;
   background: #fff;
-  color: #16382c;
-  border-radius: 999px;
+  color: #505050;
+  border-radius: 0.25rem;
   padding: 0.45em 0.95em;
-  font: inherit;
-  font-size: 0.92rem;
-  font-weight: 650;
+  font-family: $heading-font-family;
+  font-size: 0.875rem;
+  font-weight: 400;
   cursor: pointer;
-  box-shadow: 0 8px 24px rgba(28, 28, 28, 0.08);
+  box-shadow: none;
 
   &:hover,
   &.is-active {
@@ -288,13 +279,14 @@ h6 {
   z-index: 45;
   width: min(320px, 88vw);
   height: 100vh;
-  background: #fffcf7;
-  border-left: 1px solid #e6e1d6;
-  box-shadow: -12px 0 32px rgba(28, 28, 28, 0.08);
+  background: #fff;
+  border-left: 1px solid #eee;
+  box-shadow: -0.25rem 0 0.5rem rgba(0, 0, 0, 0.08);
   transform: translateX(105%);
   transition: transform 0.22s ease;
   display: flex;
   flex-direction: column;
+  font-family: $heading-font-family;
 
   &.is-open {
     transform: translateX(0);
@@ -307,12 +299,13 @@ h6 {
   justify-content: space-between;
   gap: 12px;
   padding: 18px 18px 12px;
-  border-bottom: 1px solid #ebe4d8;
+  border-bottom: 1px solid #eee;
 }
 
 .post-toc__title {
-  color: #16382c;
+  color: $heading-color;
   font-size: 1rem;
+  font-weight: 400;
 }
 
 .post-toc__close {
@@ -344,7 +337,7 @@ h6 {
 .post-toc__list--nested {
   margin: 0.15em 0 0.45em 1.15em;
   padding-left: 0.55em;
-  border-left: 2px solid #e6e1d6;
+  border-left: 1px solid #eee;
 }
 
 .post-toc__item {
@@ -390,29 +383,29 @@ h6 {
   flex: 1;
   display: block;
   padding: 0.28em 0.45em;
-  border-radius: 6px;
-  color: #2a3530;
+  border-radius: 3px;
+  color: $text-color;
   text-decoration: none;
   font-size: 0.92rem;
   line-height: 1.45;
 
   &:hover,
   &:focus {
-    background: #f3f7f4;
+    background: #f5f5f5;
     color: $brand-color;
     text-decoration: none;
   }
 
   &.is-active {
-    background: #e8f3ec;
+    background: #f0f7fb;
     color: $brand-color;
-    font-weight: 650;
+    font-weight: 400;
   }
 }
 
 .post-toc__item--h3 .post-toc__link {
   font-size: 0.86rem;
-  color: #4a5550;
+  color: #717171;
 }
 
 @media screen and (min-width: 1101px) {
@@ -423,6 +416,6 @@ h6 {
 
 @media screen and (max-width: 1100px) {
   .post-toc {
-    box-shadow: -18px 0 40px rgba(28, 28, 28, 0.16);
+    box-shadow: -0.25rem 0 0.5rem rgba(0, 0, 0, 0.12);
   }
 }

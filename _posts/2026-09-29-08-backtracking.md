@@ -44,52 +44,51 @@ void backtracking(参数) {
 
 1. leetcode 77. 组合
 
-```cpp
-class Solution {
-public:
-    vector<vector<int>> combine(int n, int k) {
-        backtracking(n, k, 1);
-        return res;
-    }
-
-    void backtracking(int n, int k, int startIndex) {
-        if (path.size() == k) {
-            res.push_back(path);
-            return;
+    ```cpp
+    class Solution {
+    public:
+        vector<vector<int>> combine(int n, int k) {
+            backtracking(n, k, 1);
+            return res;
         }
-        // for (int i = startIndex; i <= n; ++i) {
-        for (int i = statyIndex; i <= n - (k - path.size()) + 1; ++i) {
-            path.push_back(i);
-            backtracking(n, k, i + 1);
-            path.pop_back();
+
+        void backtracking(int n, int k, int startIndex) {
+            if (path.size() == k) {
+                res.push_back(path);
+                return;
+            }
+            // for (int i = startIndex; i <= n; ++i) {
+            for (int i = statyIndex; i <= n - (k - path.size()) + 1; ++i) {
+                path.push_back(i);
+                backtracking(n, k, i + 1);
+                path.pop_back();
+            }
         }
+
+    private:
+        vector<vector<int>> res;
+        vector<int> path;
     }
-
-private:
-    vector<vector<int>> res;
-    vector<int> path;
-}
-```
-
+    ```
 2. leetcode 40. 组合总和2
 
-```cpp
-class Solution{
-public:
-    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
-        sort(candidates.begin(), candidates.end());
-        backtracking(candidates, 0, target, 0);
-        return res;
-    }
-
-    void backtracking(vector<int>& candidates, int startIndex, int targetSum, int sum) {
-        if (sum == targetSum) {
-            res.push_back(path);
-            return;
+    ```cpp
+    class Solution{
+    public:
+        vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+            sort(candidates.begin(), candidates.end());
+            backtracking(candidates, 0, target, 0);
+            return res;
         }
-        for (int i = startIndex; i < candidates.size(); ++i) {
-            if (i > startIndex && candidates[i] == candidates[i - 1]) {
-                continue;
+
+        void backtracking(vector<int>& candidates, int startIndex, int targetSum, int sum) {
+            if (sum == targetSum) {
+                res.push_back(path);
+                return;
+            }
+            for (int i = startIndex; i < candidates.size(); ++i) {
+                if (i > startIndex && candidates[i] == candidates[i - 1]) {
+                    ontinue;
             }
 
             sum += candidates[i];
@@ -106,88 +105,86 @@ public:
             path.pop_back();
         }
     }
-private:
-    vector<int> path;
-    vector<vector<int>> res;
-};
-```
-
+    private:
+        vector<int> path;
+        vector<vector<int>> res;
+    };
+    ```
 3. leetcode 216. 组合总和3
 
-```cpp
-class Solution {
-public:
-    vector<vector<int>> combinationSum3(int k, int n) {
-        backtracking(n, k, 0, 1);
-        return res;
-    }
-
-    void backtracking(int targetSum, int k, int sum, int startIndex) {
-        if (path.size() == k) {
-            if (sum == targetSum) res.push_back(path);
-            return;
+    ```cpp
+    class Solution {
+    public:
+        vector<vector<int>> combinationSum3(int k, int n) {
+            backtracking(n, k, 0, 1);
+            return res;
         }
-        for (int i = startIndex; i <= 9; ++i) {
-            sum += i;
-            path.push_back(i);
 
-            if (sum > targetSum) { // 剪枝操作
-                sum -= i; // 剪枝之前先把回溯做了
-                path.pop_back(); // 剪枝之前先把回溯做了
+        void backtracking(int targetSum, int k, int sum, int startIndex) {
+            if (path.size() == k) {
+                if (sum == targetSum) res.push_back(path);
                 return;
             }
+            for (int i = startIndex; i <= 9; ++i) {
+                sum += i;
+                path.push_back(i);
 
-            backtracking(targetSum, k, sum, i + 1);
+                if (sum > targetSum) { // 剪枝操作
+                    sum -= i; // 剪枝之前先把回溯做了
+                    path.pop_back(); // 剪枝之前先把回溯做了
+                    return;
+                }
+
+                backtracking(targetSum, k, sum, i + 1);
 
             sum -= i;
             path.pop_back();
         }
     }
-private:
-    vector<vector<int>> res;
-    vector<int> path;
-};
-```
-
+    private:
+        vector<vector<int>> res;
+        vector<int> path;
+    };
+    ```
 4. leetcode 17. 电话号码的组合
 
-```cpp
-class Solution {
-public:
-    vector<string> letterCombinations(string digits) {
-        if (digits.length() == 0) return res;
-        backtracking(digits, 0);
-        return res;
-    }
+    ```cpp
+    class Solution {
+    public:
+        vector<string> letterCombinations(string digits) {
+            if (digits.length() == 0) return res;
+            backtracking(digits, 0);
+            return res;
+        }
 
-    void backtracking(const string& digits, int index) {
-        if (index == digits.length()) {
-            res.push_back(path);
+        void backtracking(const string& digits, int index) {
+            if (index == digits.length()) {
+                res.push_back(path);
             return;
+            }
+            int digit = digits[index] - '0';
+            string letters = letterMap[digit];
+            for (int i = 0; i < letters.length(); ++i) {
+                path.push_back(letters[i]);
+                backtracking(digits, index + 1);
+                path.pop_back();
+            }
         }
-        int digit = digits[index] - '0';
-        string letters = letterMap[digit];
-        for (int i = 0; i < letters.length(); ++i) {
-            path.push_back(letters[i]);
-            backtracking(digits, index + 1);
-            path.pop_back();
-        }
-    }
 
-private:
-    string path;
-    vector<string> res;
-    const string letterMap[10] = {
-        "", // 0
-        "", // 1
-        "abc", // 2
-        "def", // 3
-        "ghi", // 4
-        "jkl", // 5
-        "mno", // 6
-        "pqrs", // 7
-        "tuv", // 8
-        "wxyz", // 9
+    private:
+        string path;
+        vector<string> res;
+        const string letterMap[10] = {
+            "", // 0
+            "", // 1
+            "abc", // 2
+            "def", // 3
+            "ghi", // 4
+            "jkl", // 5
+            "mno", // 6
+            "pqrs", // 7
+            "tuv", // 8
+            "wxyz", // 9
+        };
     };
-};
-```
+    ```
