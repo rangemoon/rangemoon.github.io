@@ -3,7 +3,6 @@ layout: post
 title: 回溯
 date: 2026-09-29 12:08:00 +0800
 last_modified_at: 2026-09-29 18:40:00 +0800
-categories: 算法
 ---
 
 ## 回溯的概念

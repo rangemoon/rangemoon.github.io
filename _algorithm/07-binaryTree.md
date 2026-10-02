@@ -3,7 +3,6 @@ layout: post
 title: 二叉树
 date: 2026-09-29 12:07:00 +0800
 last_modified_at: 2026-09-29 18:40:00 +0800
-categories: 算法
 ---
 
 ## 满二叉树和完全二叉树

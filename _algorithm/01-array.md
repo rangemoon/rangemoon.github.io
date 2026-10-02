@@ -1,9 +1,8 @@
 ---
 layout: post
 title: 数组
-date: 2026-09-30 22:55:00 +0800
-last_modified_at: 2026-09-30 22:55:00 +0800
-categories: 算法
+date: 2026-10-02 10:53:00 +0800
+last_modified_at: 2026-10-02 10:53:00 +0800
 ---
 
 ## 一. 理论
@@ -426,5 +425,51 @@ categories: 算法
             else cout << p[b] - p[a - 1] << "\n";
         }
         return 0;
+    }
+    ```
+
+
+3. 开发商购买土地(二维前缀和)
+    ```cpp
+    #include <iostream>
+    #include <vector>
+    #include <climits>
+    using namespace std;
+    int main() {
+        int n, m; cin >> n >> m;
+        int sum = 0;
+        vector<vector<int>> nums(n, vector<int>(m));
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < m; ++j) {
+                cin >> nums[i][j];
+                sum += nums[i][j];
+            }
+        }
+
+        vector<int> hor(n);
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < m; ++j) {
+                hor[i] += nums[i][j];
+            }
+        }
+        vector<int> ver(m);
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < m; ++j) {
+                ver[j] += nums[i][j];
+            }
+        }
+        int res = INT_MAX;
+        int horCut = 0;
+        for (int i = 0 ; i < n; i++) {
+            horCut += hor[i];
+            // Qa = horCut, Qb = sum - horCut
+            res = min(res, abs(sum - horCut - horCut));
+        }
+        int verCut = 0;
+        for (int j = 0; j < m; j++) {
+            verCut += ver[j];
+            res = min(res, abs(sum - verCut - verCut));
+        }
+        cout << res << endl;
     }
     ```

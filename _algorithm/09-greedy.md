@@ -3,7 +3,6 @@ layout: post
 title: 贪心
 date: 2026-09-29 12:09:00 +0800
 last_modified_at: 2026-09-29 18:40:00 +0800
-categories: 算法
 ---
 
 ## 贪心的局部最优解
