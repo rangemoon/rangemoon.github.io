@@ -18,16 +18,62 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: 算法笔记
+title: orangeMoon个人笔记
 email: ""
-description: >- # this means to ignore newlines until "baseurl:"
-  数组、二叉树、回溯、贪心与图论笔记。
+description: >-
+  算法笔记、Unity、C# 与 C++ 个人笔记。
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://rangemoon.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 github_username: rangemoon
 lang: zh-CN
 minima:
   date_format: "%Y-%m-%d %H:%M"
+
+header_pages:
+  - algorithm.md
+  - unity.md
+  - csharp.md
+  - cpp.md
+
+collections:
+  algorithm:
+    output: true
+    permalink: /algorithm/:name/
+  unity:
+    output: true
+    permalink: /unity/:name/
+  csharp:
+    output: true
+    permalink: /csharp/:name/
+  cpp:
+    output: true
+    permalink: /cpp/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: algorithm
+    values:
+      layout: post
+      module: 算法笔记
+  - scope:
+      path: ""
+      type: unity
+    values:
+      layout: post
+      module: Unity
+  - scope:
+      path: ""
+      type: csharp
+    values:
+      layout: post
+      module: C#
+  - scope:
+      path: ""
+      type: cpp
+    values:
+      layout: post
+      module: C++
 
 # Build settings
 theme: minima

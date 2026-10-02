@@ -1,0 +1,43 @@
+---
+layout: default
+---
+
+{%- case page.collection_name -%}
+  {%- when "algorithm" -%}
+    {%- assign docs = site.algorithm -%}
+  {%- when "unity" -%}
+    {%- assign docs = site.unity -%}
+  {%- when "csharp" -%}
+    {%- assign docs = site.csharp -%}
+  {%- when "cpp" -%}
+    {%- assign docs = site.cpp -%}
+{%- endcase -%}
+{%- assign docs = docs | sort: "path" -%}
+
+<div class="home module-page">
+  <header class="module-page__header">
+    <h1 class="page-heading">{{ page.title | escape }}</h1>
+    <p class="module-page__count">共 {{ docs.size | default: 0 }} 篇</p>
+  </header>
+
+  {% if docs.size > 0 %}
+    <ul class="post-list">
+      {% for doc in docs %}
+        {% assign date_format = site.minima.date_format | default: "%Y-%m-%d %H:%M" %}
+        {% assign display_date = doc.last_modified_at | default: doc.date %}
+      <li>
+        {% if display_date %}
+          <span class="post-meta">最后更新于 {{ display_date | date: date_format }}</span>
+        {% endif %}
+        <h3>
+          <a class="post-link" href="{{ doc.url | relative_url }}">
+            {{ doc.title | escape }}
+          </a>
+        </h3>
+      </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="module-page__empty">暂无文档。</p>
+  {% endif %}
+</div>
