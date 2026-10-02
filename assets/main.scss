@@ -249,6 +249,76 @@ strong {
   border-top: 1px solid #eee;
 }
 
+.post-module {
+  margin: 0 0 0.35rem;
+  font-family: $heading-font-family;
+  font-size: 0.9rem;
+
+  a {
+    color: $grey-color;
+    text-decoration: none;
+
+    &:hover {
+      color: $brand-color;
+      text-decoration: underline;
+    }
+  }
+}
+
+.module-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.module-grid__item {
+  margin: 0;
+}
+
+.module-grid__link {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  color: $heading-color;
+  text-decoration: none;
+  font-family: $heading-font-family;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+
+  &:hover,
+  &:focus {
+    border-color: $brand-color;
+    background: #f8fbfd;
+    text-decoration: none;
+    color: $heading-color;
+  }
+}
+
+.module-grid__title {
+  font-size: 1.15rem;
+  color: $heading-color;
+}
+
+.module-grid__count {
+  color: $grey-color;
+  font-size: 0.9rem;
+}
+
+.module-page__count {
+  margin: 0.25rem 0 0;
+  color: $grey-color;
+  font-size: 0.95rem;
+}
+
+.module-page__empty {
+  color: $grey-color;
+}
+
 .post-toc-toggle {
   position: fixed;
   top: 88px;
