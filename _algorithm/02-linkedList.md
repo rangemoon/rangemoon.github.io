@@ -2,7 +2,7 @@
 layout: post
 title: 链表
 date: 2026-10-02 11:20:00 +0800
-last_modified_at: 2026-10-02 11:20:00 +0800
+last_modified_at: 2026-10-03 11:27:00 +0800
 ---
 
 ## 概念
@@ -142,4 +142,105 @@ last_modified_at: 2026-10-02 11:20:00 +0800
         DLinkListNode *head;
         DLinkListNode *tail;
     };
+    ```
+
+## 翻转链表(双指针法)
+- 给你单链表的头节点 head ，请你反转链表，并返回反转后的链表
+    ```cpp
+    ListNode* reverseList(ListNode *head) {
+        if (head == nullptr) return nullptr;
+        ListNode *prev = nullptr;
+        ListNode *curr = head;
+        while (curr) {
+            ListNode *next = curr->next;
+            cur->next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
+    ```
+
+## 删除链表地倒数第N个节点
+- 给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点
+    ```cpp
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* dummyNode = new ListNode(-1);
+        dummyNode->next = head;
+        ListNode* fast = head;
+        ListNode* slow = dummyNode;
+        while (n--) {
+            fast = fast->next;
+        }
+        while (fast) {
+            slow = slow->next;
+            fast = fast->next;
+        }
+        slow->next = slow->next->next;
+        return dummyNode->next;
+    }
+    ```
+
+## 链表相交
+- 给你两个单链表的头节点 headA 和 headB ，请你找出并返回两个单链表相交的起始节点。如果两个链表没有交点，返回 null 。
+    ```cpp
+    // 链表A的长度为lenA,链表B的长度为lenB
+    // 如果相交长度为c，则有a + c = lenA, b + c = lenB
+    // 获取AB的长度，让长的先走m-n步，两个就对齐了
+    // 然后一起走，相交就相同，不相交就走完
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        int lenA = 0, lenB = 0, gap = 0;
+        ListNode *curA = headA, *curB = headB;
+        while (curA) {
+            curA = curA->next;
+            lenA++;
+        }
+        while (curB) {
+            curB = curB->next;
+            lenB++;
+        }
+        curA = headA;
+        curB = headB;
+        if (lenA > lenB) {
+            gap = lenA - lenB;
+            while (gap--) {
+                curA = curA->next;
+            }
+        } else {
+            gap = lenB - lenA;
+            while (gap--) {
+                curB = curB->next;
+            }
+        }
+        while (curA != nullptr && curB != nullptr) {
+            if (curA == curB) return curA;
+            curA = curA->next;
+            curB = curB->next;
+        }
+        return nullptr;
+    }
+    ```
+
+## 环形链表2
+-  给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null
+    ```cpp
+    ListNode *detectCycle(ListNode *head) {
+        ListNode *slow = head, *fast = head;
+        while (fast != nullptr) {
+            slow = slow->next;
+            if (fast->next == nullptr) {
+                return nullptr;
+            }
+            fast = fast->next->next;
+            if (fast == slow) {
+                ListNode *ptr = head;
+                while (ptr != slow) {
+                    ptr = ptr->next;
+                    slow = slow->next;
+                }
+                return ptr;
+            }
+        }
+        return nullptr;
+    }
     ```
