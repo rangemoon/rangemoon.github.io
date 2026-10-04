@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 二叉树
-date: 2026-09-29 12:07:00 +0800
-last_modified_at: 2026-09-29 18:40:00 +0800
+date: 2026-10-04 23:23:00 +0800
+last_modified_at: 2026-10-04 23:23:00 +0800
 ---
 
 ## 满二叉树和完全二叉树
@@ -74,6 +74,7 @@ last_modified_at: 2026-09-29 18:40:00 +0800
         }
     };
     ```
+
 ## 二叉树的迭代遍历
 ### 前序遍历
 - 因为前序遍历的出栈顺序应该是根左右，则入栈顺序应该是根右左
@@ -204,7 +205,7 @@ last_modified_at: 2026-09-29 18:40:00 +0800
     }
     ```
 
-2. 637. 二叉树的层平均值
+2. 637 二叉树的层平均值
     ```cpp
     vector<double> averageOfLevels(TreeNode* root) {
         queue<TreeNode*> qu;
@@ -230,7 +231,7 @@ last_modified_at: 2026-09-29 18:40:00 +0800
     }
     ```
 
-3. 429. N 叉树的层序遍历
+3. 429 N 叉树的层序遍历
 - 给定一个 N 叉树，返回其节点值的层序遍历。（即从左到右，逐层遍历）。
     ```cpp
     vector<vector<int>> levelOrder(Node* root) {
