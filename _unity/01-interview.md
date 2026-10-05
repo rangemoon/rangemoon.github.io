@@ -1,13 +1,13 @@
 ---
 layout: post
 title: Unity 八股
-date: 2026-10-02 11:20:00 +0800
-last_modified_at: 2026-10-02 11:20:00 +0800
+date: 2026-10-05 16:03:00 +0800
+last_modified_at: 2026-10-05 17:29:00 +0800
 ---
 
-## 0. 考点
+## 0. 清单
 
-1. 生命周期完整顺序（含跨物体、Instantiate、禁用）
+1. 生命周期
 2. Update / FixedUpdate / LateUpdate / timeScale
 3. 物理：Collider / Rigidbody / Trigger / 图层 / 穿透
 4. UGUI：Canvas 模式、Raycast、合批、适配
@@ -22,7 +22,7 @@ last_modified_at: 2026-10-02 11:20:00 +0800
 
 ---
 
-## 1. 生命周期（必背表）
+## 1. 生命周期
 
 ### 1.1 常用回调顺序
 
@@ -38,7 +38,7 @@ Awake → OnEnable → Start → [循环:
 
 | 方法 | 何时 | 次数 | 典型用途 |
 |------|------|------|----------|
-| `Awake` | 对象创建后，**即使脚本逻辑要等，物体需是激活层级**；未激活物体上的脚本不 Awake，激活后才 Awake | 一次 | 保护缓存 `GetComponent` |
+| `Awake` | 对象创建后或脚本实例被加载时调用，未激活物体上的脚本不 Awake，激活后才 Awake | 一次 | 初始化变量或组件；保护缓存 `GetComponent` |
 | `OnEnable` | 物体/脚本变为 enabled | 可多次 | **订阅事件** |
 | `Start` | 第一次 Update 之前 | 一次 | 依赖别人已 Awake 的初始化 |
 | `FixedUpdate` | 固定时间步（默认 0.02s） | 每物理帧 | 加力、刚体 |
@@ -51,12 +51,12 @@ Awake → OnEnable → Start → [循环:
 补充：
 
 - **所有物体的 Awake 都先于任何 Start**（同一帧加载的一批）
-- `Instantiate`：当帧立刻 `Awake` + `OnEnable`；`Start` 在该物体第一次参与帧循环前（常是当帧稍后或下一帧，按版本/时机记「Awake 当帧、Start 不早于 Awake」）
+- `Instantiate`：当前帧立刻 `Awake` + `OnEnable`；`Start` 在该物体第一次参与帧循环前（通常是当前帧稍后或下一帧
 - 物体 inactive 时 Instantiate：Awake/OnEnable **要等激活**
 - 只关脚本 `enabled=false`：不调 Update，但物体仍在；会 OnDisable
 - 销毁顺序：先 OnDisable 再 OnDestroy
 
-**执行顺序**可在 Script Execution Order 里改；同脚本不同物体顺序 **不稳定**，不要依赖。
+**执行顺序**可在 Script Execution Order 里改；同脚本不同物体顺序 **不稳定**。
 
 ### 1.2 `Time.timeScale = 0`
 
