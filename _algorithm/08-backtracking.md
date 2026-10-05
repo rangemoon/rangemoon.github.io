@@ -2,7 +2,7 @@
 layout: post
 title: 回溯
 date: 2026-09-29 12:08:00 +0800
-last_modified_at: 2026-09-29 18:40:00 +0800
+last_modified_at: 2026-10-05 17:29:00 +0800
 ---
 
 ## 回溯的概念
@@ -185,5 +185,103 @@ void backtracking(参数) {
             "tuv", // 8
             "wxyz", // 9
         };
+    };
+    ```
+
+5. 分割字符串
+- 给你一个字符串 s，请你将 s 分割成一些 子串，使每个子串都是 回文串 。返回 s 所有可能的分割方案。
+    ```cpp
+    class Solution {
+    public:
+        vector<vector<string>> partition(string s) {
+            backtracking(s, 0);
+            return res;
+        }
+
+        void backtracking(const string& s, int startIndex) {
+            if (startIndex >= s.length()) {
+                res.push_back(path);
+                return;
+            }
+
+            for (int i = startIndex; i < s.length(); ++i) {
+                if (isPalindrome(s, startIndex, i)) {
+                    string str = s.substr(startIndex, i - startIndex + 1);
+                    path.push_back(str);
+                } else {
+                    continue;
+                }
+
+                backtracking(s, i + 1);
+
+                path.pop_back();
+            }
+        }
+
+        bool isPalindrome(const string& s, int start, int end) {
+            for (int i = start, j = end; i < j; ++i, --j) {
+                if (s[i] != s[j]) return false;
+            }
+            return true;
+        }
+
+    private:
+        vector<string> path;
+        vector<vector<string>> res;
+    };
+    ```
+
+6. 93 恢复IP地址
+- 给定一个只包含数字的字符串，复原它并返回所有可能的 IP 地址格式。
+    ```cpp
+    class Solution {
+    public:
+        vector<string> restoreIpAddresses(string s) {
+        backtracking(s, 0, 0);
+        return res;
+    }
+
+    void backtracking(string& s, int startIndex, int pointNum) {
+        if (pointNum == 3) {
+            if (check(s, startIndex, s.length() - 1)) {
+                res.push_back(s);
+            }
+            return;
+        }
+
+        for (int i = startIndex; i < s.length(); ++i) {
+            if (check(s, startIndex, i)) {
+                s.insert(s.begin() + i + 1, '.');
+                pointNum++;
+
+                backtracking(s, i + 2, pointNum);
+
+                pointNum--;
+                s.erase(s.begin() + i + 1);
+            } else
+                break;
+        }
+    }
+
+    bool check(const string& s, int start, int end) {
+        if (start > end)
+            return false;
+        if (s[start] == '0' && start != end) {
+            // 0开头不合法
+            return false;
+        }
+        int num = 0;
+        for (int i = start; i <= end; ++i) {
+            if (s[i] > '9' || s[i] < '0')
+                return false;
+            num = num * 10 + (s[i] - '0');
+            if (num > 255)
+                return false;
+        }
+        return true;
+    }
+
+    private:
+        vector<string> res;
     };
     ```

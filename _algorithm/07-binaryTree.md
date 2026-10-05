@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 二叉树
-date: 2026-10-04 23:23:00 +0800
-last_modified_at: 2026-10-04 23:23:00 +0800
+date: 2026-10-05 11:04:00 +0800
+last_modified_at: 2026-10-05 17:29:00 +0800
 ---
 
 ## 满二叉树和完全二叉树
@@ -253,5 +253,82 @@ last_modified_at: 2026-10-04 23:23:00 +0800
             res.push_back(level);
         }
         return res;
+    }
+    ```
+
+4. 116 填充每个节点的下一个右侧节点指针
+- 给定一个 完美二叉树 ，其所有叶子节点都在同一层，每个父节点都有两个子节点。
+- 填充它的每个 next 指针，让这个指针指向其下一个右侧节点。如果找不到下一个右侧节点，则将 next 指针设置为 NULL。
+    ```cpp
+    Node* connect(Node* root) {
+        queue<Node*> qu;
+        if (root != NULL) qu.push(root);
+        while (!qu.empty()) {
+            int sz = qu.size();
+            Node *nodepre, *node;
+            for (int i = 0; i < sz; ++i) {
+                if (i == 0) {
+                    nodepre = qu.front(); // 一层中的头节点
+                    qu.pop();
+                    node = nodepre;
+                } else {
+                    node = qu.front();
+                    qu.pop();
+                    nodepre->next = node; // 本层前一个节点next指向本节点
+                    nodepre = nodepre->next;
+                }
+                if (node->left) qu.push(node->left);
+                if (node->right) qu.push(node->right);
+            }
+            nodepre->next = NULL; // 本层最后一个节点指向NULL
+        }
+        return root;
+    }
+    ```
+
+5. 104 二叉树的最大深度
+- 给定一个二叉树，找出其最大深度
+    ```cpp
+    int maxDepth(TreeNode *root) {
+        if (root == NULL) return 0;
+        queue<TreeNode*> qu;
+        qu.push(root);
+        int dp = 0;
+        while (qu.size()) {
+            int sz = qu.size();
+            for (int i = 0; i < sz; ++i) {
+                TreeNode *node = qu.front();
+                qu.pop();
+
+                if (node->left) qu.push(node->left);
+                if (node->right) qu.push(node->right);
+            }
+            dp++;
+        }
+        return dp;
+    }
+    ```
+
+6. 111 二叉树的最小深度
+- 最小深度是从根节点到最近叶子节点的最短路径上的节点数量
+    ```cpp
+    int minDepth(TreeNode* root) {
+        if (root == NULL) return 0;
+        queue<TreeNode*> qu;
+        qu.push(root);
+        int dp = 1;
+        while (qu.size()) {
+            int sz = qu.size();
+            for (int i = 0; i < sz; ++i) {
+                TreeNode *node = qu.front();
+                qu.pop();
+
+                if (node->left == NULL && node->right == NULL) return dp;
+                if (node->left) qu.push(node->left);
+                if (node->right) qu.push(node->right);
+            }
+            dp++;
+        }
+        return dp;
     }
     ```
