@@ -2,7 +2,7 @@
 layout: post
 title: Unity 八股
 date: 2026-10-05 16:03:00 +0800
-last_modified_at: 2026-10-05 17:29:00 +0800
+last_modified_at: 2026-10-06 16:35:00 +0800
 ---
 
 ## 0. 清单
@@ -101,11 +101,6 @@ Rigidbody：
 | Dynamic | 是 | 物理引擎 |
 | Kinematic | 否 | `MovePosition` / 动画 |
 | Static | 否 | 不要每帧动（成本高） |
-
-移动 Dynamic 不要每帧改 `transform.position`（传送），用 `MovePosition`/`AddForce`。  
-插值 Interpolation 抹平渲染与物理步差。
-
-**高速穿透：** Discrete 漏检 → Continuous / Continuous Dynamic；或加厚、不要过小过快。
 
 查询：`Raycast` / `OverlapSphere`；热路径用 `NonAlloc` + 复用数组。  
 `NonAlloc` 本身不分配，**后面 `new List` 仍 GC**。
